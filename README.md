@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Research-Papers-Recommendation-System-and-Subject-Area-Prediction-Using-Deep-Learning-and-LLMS
 # Overview
 This repository hosts a machine learning project that encompasses two key functionalities: a research papers recommendation system and subject area prediction. The goal of the project is to provide users with tailored recommendations based on their preferences and to predict the subject area of research papers.
@@ -28,3 +29,6 @@ This project is licensed under the NOOR SAEED
 
 Acknowledgments
 Mention any credits or acknowledgments for third-party tools, libraries, or resources used in the project.
+=======
+# NLP_PROJECT
+>>>>>>> 91e72c09e51dc08ebf0fd923a1d3d412ab2f567a
