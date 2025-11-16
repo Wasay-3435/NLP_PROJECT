@@ -272,6 +272,6 @@ if st.button("🔍 Analyze", type="primary", use_container_width=True):
 
 # Footer
 st.markdown("---")
-st.markdown("*Made by Ashraf Mahdi & Syed Wasi Ali Shah*")
+st.markdown("*Made by Ashraf Mahdi & Syed Wasia Ali Shah*")
 
 
