@@ -1,209 +1,180 @@
-📄 Research Area & Subject Area Prediction for ArXiv Papers
+# 📄 Research Paper Recommendation & Subject Area Prediction
 
+An **AI-powered application** for recommending research papers and predicting their subject areas using **MLP, Logistic Regression, and 1D-CNN models**. This project leverages **ArXiv abstracts dataset** and **Sentence Transformers** for semantic similarity.
 
+---
 
+## 🔗 Project Links
+- Dataset: [ArXiv Paper Abstracts on Kaggle](https://www.kaggle.com/datasets/spsayakpaul/arxiv-paper-abstracts/data)  
+- Live Demo (if hosted): *Add your link here*  
 
+---
 
+## 🧠 Project Overview
 
-📝 Project Overview
+This project provides:
 
-This project provides a multi-label classification system for predicting research areas and subject areas of scientific papers from ArXiv. It also includes a recommendation engine to suggest similar papers based on titles using Sentence Transformers embeddings.
+1. **Paper Recommendations**: Based on semantic similarity using **Sentence Transformers** embeddings.
+2. **Subject Area Predictions**: Multi-label classification using:
+   - **Model 1**: Shallow Multi-Layer Perceptron (MLP) with TF-IDF vectors
+   - **Model 2**: Logistic Regression (baseline)
+   - **Model 3**: 1D Convolutional Neural Network (CNN) with word embeddings
 
-The project is implemented using:
+**Why this project?**  
+- Helps researchers quickly find relevant papers.
+- Automatically predicts ArXiv subject areas from abstracts.
+- Supports large-scale multi-label classification.
 
-Deep Learning Models: MLP (TF-IDF), 1D-CNN (embedding + convolution)
+---
 
-Classical ML: Logistic Regression (baseline)
+## 🗂 Dataset
 
-Embedding-based Recommendations: Sentence Transformers
+The project uses the **ArXiv Paper Abstracts dataset**:
 
-🔗 Dataset
+- **Source**: [Kaggle Dataset](https://www.kaggle.com/datasets/spsayakpaul/arxiv-paper-abstracts/data)
+- **Columns**: `titles`, `abstracts`, `terms`
+- **Preprocessing**:
+  - Removed duplicates
+  - Filtered rare terms
+  - Explored distribution of abstract lengths and top subject areas
+  - Created TF-IDF and integer-sequence representations for models
 
-The dataset contains ArXiv paper abstracts and metadata:
+---
 
-Source: Kaggle - ArXiv Paper Abstracts
+## 🛠 Features
 
-Columns: titles, abstracts, terms (subject areas)
+### 1. Research Paper Recommendation
+- Uses **Sentence Transformers** (`all-MiniLM-L6-v2`) for semantic embeddings.
+- Computes **cosine similarity** between paper titles.
+- Returns **top-5 recommended papers**.
 
-Preprocessing steps:
+### 2. Subject Area Prediction
+- Multi-label classification for ArXiv subject categories.
+- Uses three different models:
+  - **MLP**: TF-IDF input, two hidden layers, dropout for regularization.
+  - **Logistic Regression**: Baseline, one-vs-rest classifier.
+  - **1D-CNN**: Embedding + Conv1D + GlobalMaxPooling for n-gram pattern detection.
+- Threshold-based prediction with confidence scores.
 
-Remove duplicate titles
+---
 
-Filter rare terms (appear only once)
+## ⚙ Installation
 
-Text vectorization using TF-IDF (MLP & Logistic Regression) and integer sequences (1D-CNN)
+```bash
+# Clone repository
+git clone <your-repo-url>
+cd <your-repo-folder>
 
-Multi-label encoding using StringLookup (TensorFlow) and MultiLabelBinarizer (Scikit-learn)
-
-🛠 Features
-
-Subject Area Prediction
-
-Multi-label classification for ArXiv abstracts
-
-Models:
-
-Shallow MLP: TF-IDF vectorized input
-
-Logistic Regression: Baseline, TF-IDF input
-
-1D-CNN: Embedding + Conv1D over sequences
-
-Returns top categories with probabilities
-
-Paper Recommendation
-
-Generates top 5 similar papers based on title embeddings
-
-Uses sentence-transformers (all-MiniLM-L6-v2)
-
-Streamlit Web App
-
-User-friendly interface
-
-Input paper title for recommendations
-
-Input abstract for subject area predictions
-
-Displays predictions with confidence bars
-
-📊 Exploratory Data Analysis
-
-Abstract length distribution
-
-Top 20 most frequent subject areas
-
-Word cloud visualization for paper abstracts
-
-Data cleaning & filtering for rare categories
-
-⚙️ Installation
-
-Clone the repository:
-
-git clone https://github.com/<your-username>/arxiv-subject-prediction.git
-cd arxiv-subject-prediction
-
-
-Create a Python virtual environment:
-
+# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+source venv/bin/activate   # Linux/Mac
+# venv\Scripts\activate    # Windows
 
-
-Install dependencies:
-
+# Install dependencies
 pip install -r requirements.txt
+Key Libraries Used:
 
+tensorflow
 
-Required packages:
+torch
 
-tensorflow==2.15.0
+sentence-transformers
 
-torch==2.0.1
+scikit-learn
 
-sentence-transformers==2.2.2
+pandas, numpy, matplotlib, seaborn
 
-streamlit
+streamlit (for app interface)
 
-scikit-learn, pandas, numpy, matplotlib, seaborn, wordcloud
+🚀 How to Run
+Streamlit App
+bash
+Copy code
+streamlit run app.py
+Enter a paper title for recommendations
 
-🚀 Usage
-1️⃣ Jupyter Notebook
+Enter an abstract to predict subject areas
 
-Run Arxiv_Subject_Prediction.ipynb for:
+Get top recommendations and predicted labels with confidence
 
-Data preprocessing
+Notebook
+Open Research_Area_Prediction.ipynb
 
-EDA (plots, word clouds)
+Run the cells sequentially:
+
+Data loading & preprocessing
+
+EDA & visualization
 
 Model training (MLP, Logistic Regression, 1D-CNN)
 
-Evaluation and benchmarking
+Benchmarking & evaluation
 
-2️⃣ Streamlit App
+Save & load models for deployment
 
-Run the app:
+📊 Model Evaluation
+Model	Input Type	Accuracy / Metric	Notes
+MLP	TF-IDF vectors	Binary Accuracy	Shallow non-linear model
+Logistic Regression	TF-IDF vectors	F1-score (macro)	Baseline
+1D-CNN	Integer sequences	Binary Accuracy	Captures n-gram patterns
 
-streamlit run app.py
+The 1D-CNN model generally performs best on semantic patterns and multi-label classification.
 
+📝 Example Predictions
+Abstract:
+"Graph neural networks are used for learning node representations."
 
-App Features:
+Predicted Categories (Top-5):
 
-Input paper title → get top 5 recommended papers
+cs.LG: 92.5%
 
-Input paper abstract → get predicted subject areas with confidence
+cs.AI: 87.4%
 
-Displays progress bars and probability scores
+stat.ML: 74.1%
 
-🏆 Model Architecture
-1️⃣ Shallow MLP
+cs.NE: 63.2%
 
-Input: TF-IDF vector of abstracts
+cs.CV: 59.8%
 
-Layers: 512 → 256 → output (sigmoid for multi-label)
+📂 Saved Models & Files
+models/model.keras → MLP model
 
-Loss: binary_crossentropy
+models/model_cnn.keras → 1D-CNN model
 
-Optimizer: adam
+models/log_reg_pipeline.pkl → Logistic Regression
 
-2️⃣ Logistic Regression
+models/text_vectorizer_config.pkl → TextVectorization config
 
-Baseline linear model
+models/text_vectorizer_weights.pkl → TF-IDF / vectorizer weights
 
-TF-IDF input
+models/label_vocab.pkl → Label vocabulary
 
-One-vs-Rest classification
+models/embeddings.pkl → Sentence Transformer embeddings
 
-3️⃣ 1D-CNN
+models/sentences.pkl → Paper titles
 
-Input: Integer-encoded sequences
+models/rec_model.pkl → Sentence Transformer recommendation model
 
-Embedding layer → Conv1D → GlobalMaxPooling → Dense → Sigmoid
+⚡ Limitations
+Class imbalance in the dataset affects rare categories
 
-Captures local n-gram patterns
+Only predicts categories with >1 occurrence in dataset
 
-📈 Results
-Model	Accuracy / F1	Notes
-Shallow MLP	XX%	Good for frequent categories
-Logistic Regression	XX%	Baseline, simple & fast
-1D-CNN	XX%	Best performance, captures sequence info
+TF-IDF and basic embeddings may not capture deep semantic meaning
 
-⚠ Class imbalance affects rare categories. 1D-CNN performs best on frequent & medium-frequency classes.
+🌟 Future Improvements
+Fine-tune BERT/SciBERT for better semantic understanding
 
-🔮 Future Improvements
+Implement data augmentation for rare classes
 
-Fine-tune BERT / SciBERT for state-of-the-art performance
+Hyperparameter tuning for all models
 
-Address class imbalance with oversampling or augmentation
+Deploy a web interface with faster response using GPU acceleration
 
-Hyperparameter tuning for CNN / MLP
-
-Deploy web app with Docker / Streamlit Cloud
-
-📂 File Structure
-arxiv-subject-prediction/
-├─ models/                   # Saved models and vectorizers
-├─ Arxiv_Subject_Prediction.ipynb  # Notebook with preprocessing and training
-├─ app.py                    # Streamlit app
-├─ requirements.txt
-├─ README.md
-└─ dataset/
-   └─ arxiv_data_210930-054931.csv
-
-🧑‍💻 Authors
-
+👥 Authors
 Ashraf Mahdi
 
 Syed Wasia Ali Shah
 
-🔗 References
-
-Kaggle - ArXiv Paper Abstracts
-
-TensorFlow Docs
-
-Sentence Transformers
-
-Streamlit
+📄 License
+This project is released under the MIT License
