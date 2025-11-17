@@ -158,7 +158,7 @@ models/rec_model.pkl → Sentence Transformer recommendation model
 ⚡ Limitations
 Class imbalance in the dataset affects rare categories
 
-Only predicts categories with >1 occurrence in dataset
+Only predicts categories with > 1 occurrence in dataset
 
 TF-IDF and basic embeddings may not capture deep semantic meaning
 
@@ -172,9 +172,7 @@ Hyperparameter tuning for all models
 Deploy a web interface with faster response using GPU acceleration
 
 👥 Authors
-Ashraf Mahdi
-
-Syed Wasia Ali Shah
+**SYED WASIA ALI SHAH & ASHRAF MAHDI**
 
 📄 License
 This project is released under the MIT License
